@@ -1,0 +1,41 @@
+.connection-list {
+    margin: auto;
+    max-width: 100%;
+}
+
+.connection-list > ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    padding: 0;
+    gap: 2rem;
+    max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .connection-list {
+        width: 100%;
+    }
+
+    .connection-list > .horizontal-wrapper {
+        flex-direction: column;
+    }
+
+    .connection-list > .horizontal-wrapper > .horizontal-wrapper {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+
+    .connection-list > .horizontal-wrapper > .horizontal-wrapper > .button-secondary {
+        font-size: var(--font-size-small);
+        padding: 0.5rem;
+        width: min-content;
+        margin: 0;
+    }
+
+    .connection-list > ul {
+        width: 100%;
+    }
+}
+

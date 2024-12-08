@@ -1,0 +1,109 @@
+#quick-access {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#quick-access-form {
+    display: grid;
+    grid-template-columns: 3fr 3fr 1fr 2fr 1fr 2fr;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    height: auto;
+    width: 100%;
+    border-radius: var(--border-radius);
+    background-color: var(--background-color);
+    box-shadow: var(--shadow-dark);
+    z-index: 50;
+    transform: translateY(-50%);
+}
+
+#time {
+    width: auto;
+}
+
+#pax {
+    max-width: 50px;
+}
+
+.react-datepicker {
+    width: max-content;
+    background-color: var(--background-color) !important;
+    color: var(--text-default) !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif !important;
+    border: var(--default-border)!important;
+}
+
+.react-datepicker__navigation {
+    margin: 0;
+}
+
+.react-datepicker__time-list {
+    width: 99%!important;
+    height: calc(195px + 3rem / 2)!important;
+    background-color: var(--background-color) !important;
+
+}
+
+.react-datepicker__navigation:hover {
+    background-color: transparent;
+}
+
+.react-datepicker__day--selected {
+    background-color: var(--primary)!important;
+}
+
+.react-datepicker__time-list-item--selected {
+    background-color: var(--primary)!important;
+}
+
+.react-datepicker__header {
+    background-color: var(--gray-900)!important;
+}
+
+.submit {
+    margin: 0;
+    height: auto;
+    white-space: nowrap;
+}
+
+@media (max-width: 1300px) and (max-height: 700px) {
+    #quick-access-form {
+        transform: translateY(-25%);
+    }
+
+    .submit {
+        white-space: wrap;
+    }
+}
+
+@media (max-width: 1024px) {
+    #quick-access {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #quick-access-form {
+        grid-template-rows: repeat(5, 1fr);
+        grid-template-columns: none;
+        padding: 1rem;
+        transform: translateY(-20%);
+    }
+
+    .quick-access-input,
+    .submit {
+        width: 100%;
+    }
+
+    .quick-access-input-wrapper > label {
+        display: flex;
+        flex-direction: column;
+    }
+}

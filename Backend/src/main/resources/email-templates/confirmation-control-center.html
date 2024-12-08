@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bestätigt - VGI Bus Gruppenbuchen</title>
+</head>
+<body>
+<h1>Neue VGI Bus Gruppenbuchung</h1>
+<br>
+<p>Sehr geehrte Leitstelle,</p>
+<p>Es wurde eine neue Bus Gruppenbuchung erstellt.</p>
+<strong>Bitte stellen Sie den Bussen, der folgenden Verbindung, die passenden Benachrichtigungen ein.</strong>
+<hr>
+<h2>Buchungsdetails:</h2>
+<table>
+  <tr><td><strong>Pax:</strong></td><td>{{pax}}</td></tr>
+  <tr><td><strong>Name:</strong></td><td>{{firstName}} {{lastName}}</td></tr>
+  <tr><td><strong>Email:</strong></td><td>{{email}}</td></tr>
+  <tr><td><strong>Telefonnummer:</strong></td><td>{{phoneNumber}}</td></tr>
+  <tr><td><strong>Institution:</strong></td><td>{{institution}}</td></tr>
+  <tr><td><strong>Booking ID:</strong></td><td>{{bookingId}}</td></tr>
+</table>
+<hr>
+<h2>Verbindung:</h2>
+<br>
+{{connection}}
+<hr>
+<br>
+<p>Wenn Sie diese Buchung stornieren müssen, können Sie dies tun, indem Sie auf den folgenden Link klicken: <a href="{{cancellationURI}}">Buchung stornieren</a></p>
+<p>Für Fragen wenden Sie sich bitte an Ihren Kontakt bei den VGI. Wir bedanken uns für Ihre Mitarbeit!</p>
+<br>
+<p>Mit freundlichen Grüßen,</p>
+<p>Ihr VGI</p>
+<br>
+<br>
+<br>
+<p>Diese E-Mail wurde automatisch erstellt und kann nicht beantwortet werden.</p>
+</body>
+</html>
