@@ -1,0 +1,88 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    container_name: vgi-postgres
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: transport_data
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./Backend/database/data/csv:/csv
+      - ./Backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d transport_data -U myuser"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API
+  backend:
+    container_name: vgi-backend
+    build:
+      context: ./Backend
+      dockerfile: src/main/docker/Dockerfile.jvm
+    restart: unless-stopped
+    environment:
+      # Database Configuration
+      DB_USERNAME: myuser
+      DB_PASSWORD: mypassword
+      JDBC_URL: jdbc:postgresql://postgres:5432/transport_data
+      
+      # Application Configuration
+      FRONTEND_URL: http://localhost:3000
+      ADMIN_EMAIL: admin@example.com
+      CONTROL_CENTER_EMAIL: control@example.com
+      
+      # Google APIs (Set these in .env file)
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      
+      # Email Configuration (Set these in .env file)
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/q/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React App
+  frontend:
+    container_name: vgi-frontend
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      REACT_APP_API_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    volumes:
+      - ./Frontend/src:/app/src
+      - ./Frontend/public:/app/public
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  default:
+    name: vgi-network
